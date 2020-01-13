@@ -4,7 +4,7 @@
 load  File.expand_path("DetectOS.rb")  if File.exists?("DetectOS.rb")
 
 Vagrant.configure("2") do |config|
-  config.vm.box = "ubuntu/bionic64-develop"
+  config.vm.box = "takahiro-itou/ubuntu-bionic64-develop"
 
   config.vm.provider "virtualbox" do |v|
     v.name   = "vagrant-ubuntu-develop"
@@ -12,16 +12,19 @@ Vagrant.configure("2") do |config|
 
     v.gui    = false
     v.customize [
-      "modifyvm",        :id,
-      "--hwvirtex",      "on",
-      "--nestedpaging",  "on",
-      "--largepages",    "on",
-      "--ioapic",        "on",
-      "--pae",           "on",
-      "--paravirtprovider",  "kvm",
-      "--uartmode1",     "disconnected",
+      "modifyvm",           :id,
+      "--cableconnected1",  "on",
+      "--hwvirtex",         "on",
+      "--nestedpaging",     "on",
+      "--largepages",       "on",
+      "--ioapic",           "on",
+      "--pae",              "on",
+      "--paravirtprovider", "kvm",
+      "--uartmode1",        "disconnected",
     ]
   end
+
+  config.vm.boot_timeout = 900
 
   config.vm.provision("file",
                       source: "../data/",
