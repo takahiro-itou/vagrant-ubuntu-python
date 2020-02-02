@@ -40,7 +40,7 @@ Vagrant.configure("2") do |config|
   config.vm.provision("user", type: "shell",
                       path: "provision.user.sh",
                       privileged: false)
-  config.vm.provision("user", type: "shell",
+  config.vm.provision("hguser", type: "shell",
                       path: "provision.hguser.sh",
                       privileged: false)
   config.vm.synced_folder(".", "/vagrant", disabled: true)
